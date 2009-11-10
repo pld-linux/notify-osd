@@ -13,6 +13,8 @@ BuildRequires:	dbus-glib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libwnck-devel
+Obsoletes:	dbus(org.freedesktop.Notifications)
+Provides:	dbus(org.freedesktop.Notifications)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
