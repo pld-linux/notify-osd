@@ -9,13 +9,17 @@ URL:		https://edge.launchpad.net/notify-osd
 Source0:	http://edge.launchpad.net/notify-osd/trunk/%{line}/+download/%{name}-%{version}.tar.gz
 # Source0-md5:	b3670469df029546c585d35377025d52
 BuildRequires:	GConf2-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	dbus-glib-devel
 BuildRequires:	glib2-devel
+BuildRequires:	gnome-common
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool
 BuildRequires:	libwnck-devel
-Obsoletes:	dbus(org.freedesktop.Notifications)
+BuildRequires:	pkgconfig
 Provides:	dbus(org.freedesktop.Notifications)
+Obsoletes:	dbus(org.freedesktop.Notifications)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
