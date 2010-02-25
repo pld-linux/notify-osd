@@ -12,6 +12,7 @@ BuildRequires:	GConf2-devel
 BuildRequires:	dbus-glib-devel
 BuildRequires:	glib2-devel
 BuildRequires:	libnotify-devel
+BuildRequires:	libtool
 BuildRequires:	libwnck-devel
 Obsoletes:	dbus(org.freedesktop.Notifications)
 Provides:	dbus(org.freedesktop.Notifications)
@@ -28,6 +29,7 @@ disappear after a short period of time.
 %setup -q
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
