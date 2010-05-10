@@ -1,13 +1,13 @@
-%define		line	ubuntu-9.10
+%define		line	10.04-beta-2
 Summary:	On-screen-display notification agent
 Name:		notify-osd
-Version:	0.9.24
+Version:	0.9.29
 Release:	1
-License:	GPLv3
+License:	GPL v3
 Group:		Applications/System
 URL:		https://edge.launchpad.net/notify-osd
-Source0:	http://edge.launchpad.net/notify-osd/trunk/%{line}/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	b3670469df029546c585d35377025d52
+Source0:	http://launchpad.net/notify-osd/lucid/ubuntu-%{line}/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	13df20eb3c6d06c17eef07400e1650d8
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
