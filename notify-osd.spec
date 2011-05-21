@@ -1,13 +1,13 @@
 %define		line	10.04-beta-2
 Summary:	On-screen-display notification agent
 Name:		notify-osd
-Version:	0.9.29
+Version:	0.9.30
 Release:	1
-License:	GPL v3
+License:	GPL v3+
 Group:		Applications/System
 URL:		https://edge.launchpad.net/notify-osd
-Source0:	http://launchpad.net/notify-osd/lucid/ubuntu-%{line}/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	13df20eb3c6d06c17eef07400e1650d8
+Source0:	http://edge.launchpad.net/notify-osd/natty/natty-alpha3/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	aa52780eb7be9eab6d6bd3a6b055ac09
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -34,7 +34,7 @@ disappear after a short period of time.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
 %configure
