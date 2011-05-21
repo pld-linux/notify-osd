@@ -8,6 +8,7 @@ Group:		Applications/System
 URL:		https://edge.launchpad.net/notify-osd
 Source0:	http://edge.launchpad.net/notify-osd/natty/natty-alpha3/+download/%{name}-%{version}.tar.gz
 # Source0-md5:	aa52780eb7be9eab6d6bd3a6b055ac09
+Patch0:		%{name}-libnotify.patch
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -31,6 +32,7 @@ disappear after a short period of time.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
