@@ -163,3 +163,205 @@
  
  		// inject it into the queue
  		res = notify_notification_show (n, &error);
+--- notify-osd-0.9.30/tests/test-synchronous.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/tests/test-synchronous.c	2011-05-21 16:46:49.156752427 +0200
+@@ -38,7 +38,11 @@
+         NotifyNotification *n;
+ 	n = notify_notification_new ("Test notification",
+ 				     g_strdup (message),
+-				     "", NULL);
++				     ""
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				     , NULL
++#endif
++				     );
+ 	notify_notification_show (n, NULL);
+ 	g_object_unref(G_OBJECT(n));
+ }
+@@ -53,8 +57,11 @@
+ 	if (n == NULL)
+ 		n = notify_notification_new (" ",
+ 					     "",
+-					     g_strdup (icon),
+-					     NULL);
++					     g_strdup (icon)
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++					     , NULL
++#endif
++					     );
+ 	else
+ 		notify_notification_update (n,
+ 					    " ",
+--- notify-osd-0.9.30/examples/summary-only.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/summary-only.c	2011-05-21 16:48:53.217752526 +0200
+@@ -52,8 +52,11 @@
+ 	notification = notify_notification_new (
+ 				"Summary-only",
+ 				NULL,
+-				NULL,
+-				NULL);
++				NULL
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				, NULL
++#endif
++				);
+ 	error = NULL;
+ 	success = notify_notification_show (notification, &error);
+ 	if (!success)
+--- notify-osd-0.9.30/examples/append-hint-example.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/append-hint-example.c	2011-05-21 16:50:37.031752494 +0200
+@@ -41,7 +41,11 @@
+ 	GError*             error = NULL;
+ 
+ 	/* initial notification */
+-	notification = notify_notification_new (title, body, icon, NULL);
++	notification = notify_notification_new (title, body, icon
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++			, NULL
++#endif
++			);
+ 	notify_notification_set_hint_string (notification,
+ 					     "x-canonical-append",
+ 					     "");
+--- notify-osd-0.9.30/examples/icon-only.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/icon-only.c	2011-05-21 16:52:31.497752516 +0200
+@@ -54,8 +54,11 @@
+ 		notification = notify_notification_new (
+ 					"Eject", /* for a11y-reasons put something meaningfull here */
+ 					NULL,
+-					"notification-device-eject",
+-					NULL);
++					"notification-device-eject"
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++					, NULL
++#endif
++					);
+ 		notify_notification_set_hint_string (notification,
+ 						     "x-canonical-private-icon-only",
+ 						     "");
+--- notify-osd-0.9.30/examples/icon-summary-body.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/icon-summary-body.c	2011-05-21 16:55:38.404752491 +0200
+@@ -54,8 +54,11 @@
+ 				"Hey pal, what's up with the party "
+ 				"next weekend? Will you join me "
+ 				"and Anna?",
+-				"notification-message-im",
+-				NULL);
++				"notification-message-im"
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				, NULL
++#endif
++				);
+ 	error = NULL;
+ 	success = notify_notification_show (notification, &error);
+ 	if (!success)
+--- notify-osd-0.9.30/examples/icon-summary.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/icon-summary.c	2011-05-21 16:56:45.856752527 +0200
+@@ -52,8 +52,11 @@
+ 	notification = notify_notification_new (
+ 				"WiFi connection lost",
+ 				NULL,
+-				"notification-network-wireless-disconnected",
+-				NULL);
++				"notification-network-wireless-disconnected"
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				, NULL
++#endif
++				);
+ 	error = NULL;
+ 	success = notify_notification_show (notification, &error);
+ 	if (!success)
+--- notify-osd-0.9.30/examples/icon-updating.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/icon-updating.c	2011-05-21 16:58:19.361752548 +0200
+@@ -53,8 +53,11 @@
+ 	notification = notify_notification_new (
+ 		"Test 1/3",
+ 		"Set icon via hint \"image_path\" to logo-icon.",
+-		NULL,
+-		NULL);
++		NULL
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++		, NULL
++#endif
++		);
+ 	notify_notification_set_hint_string (
+ 		notification,
+ 		"image_path",
+--- notify-osd-0.9.30/examples/icon-value.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/icon-value.c	2011-05-21 16:59:12.151752514 +0200
+@@ -42,8 +42,11 @@
+ 	notification = notify_notification_new (
+ 				"Brightness",  /* for a11y-reasons put something meaningfull here */
+ 				NULL,
+-				icon,
+-				NULL);
++				icon
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				, NULL
++#endif
++				);
+ 	notify_notification_set_hint_int32 (notification,
+ 					    "value",
+ 					    value);
+--- notify-osd-0.9.30/examples/summary-body.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/summary-body.c	2011-05-21 17:00:04.970752526 +0200
+@@ -52,8 +52,11 @@
+ 	notification = notify_notification_new (
+ 				"Totem",
+ 				"This is a superfluous notification",
+-				NULL,
+-				NULL);
++				NULL
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				, NULL
++#endif
++				);
+ 	error = NULL;
+ 	success = notify_notification_show (notification, &error);
+ 	if (!success)
+--- notify-osd-0.9.30/examples/sync-icon-only.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/sync-icon-only.c	2011-05-21 17:01:06.392760385 +0200
+@@ -55,8 +55,11 @@
+ 		notification = notify_notification_new (
+ 					"Eject", /* for a11y-reasons put something meaningfull here */
+ 					NULL,
+-					"notification-device-eject",
+-					NULL);
++					"notification-device-eject"
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++					, NULL
++#endif
++					);
+ 		notify_notification_set_hint_string (notification,
+ 						     "x-canonical-private-icon-only",
+ 						     "");
+--- notify-osd-0.9.30/examples/update-notifications.c~	2011-02-25 09:10:24.000000000 +0100
++++ notify-osd-0.9.30/examples/update-notifications.c	2011-05-21 17:02:17.937752535 +0200
+@@ -53,8 +53,11 @@
+ 				"Inital notification",
+ 				"This is the original content of "
+ 				"this notification-bubble.",
+-				"notification-message-im",
+-				NULL);
++				"notification-message-im"
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				, NULL
++#endif
++				);
+ 	error = NULL;
+ 	success = notify_notification_show (notification, &error);
+ 	if (!success)
+@@ -97,8 +100,11 @@
+ 				"Initial layout",
+ 				"This bubble uses the icon-title-body "
+ 				"layout.",
+-				"notification-message-im",
+-				NULL);
++				"notification-message-im"
++#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
++				, NULL
++#endif
++				);
+ 	error = NULL;
+ 	success = notify_notification_show (notification, &error);
+ 	if (!success)
