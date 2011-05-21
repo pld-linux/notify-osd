@@ -1,5 +1,5 @@
---- notify-osd-0.9.30/tests/test-withlib.c~	2011-02-25 09:10:24.000000000 +0100
-+++ notify-osd-0.9.30/tests/test-withlib.c	2011-05-21 16:27:58.986752462 +0200
+--- notify-osd-0.9.30/tests/test-withlib.c.orig	2011-05-21 16:39:15.873752286 +0200
++++ notify-osd-0.9.30/tests/test-withlib.c	2011-05-21 16:40:47.154752443 +0200
 @@ -94,7 +94,11 @@
  
  	n = notify_notification_new ("Test",
@@ -131,8 +131,8 @@
 +				     "notification-audio-play"
 +#if !defined(NOTIFY_VERSION_MINOR) || (NOTIFY_VERSION_MAJOR == 0 && NOTIFY_VERSION_MINOR < 7)
 +				     , NULL
-+				     );
 +#endif
++				     );
  	notify_notification_set_hint_string (n, "icon-only", "allowed");
  	res = notify_notification_show (n, NULL);
  	g_assert (res);
